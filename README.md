@@ -13,6 +13,8 @@ Este projeto demonstra como integrar o Webpack ao .NET MVC para gerenciar arquiv
 - `./Components/Webpack.js`
 - `./package.json`
 - `./webpack.config.js`
+- `./webpack.view.config.js`
+- `./webpack.controller.config.js`
 
 ---
 
