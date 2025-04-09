@@ -1,20 +1,20 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import * as path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = function(views) {
+export default function (views) {
     return Object.keys(views).flatMap((controllerName) => {
         return Object.keys(views[controllerName]).map((viewName) => {
-            let outputPath = path.resolve(__dirname, `./Views/Shared/Components/Webpack/${controllerName}/${viewName}/index.cshtml`);
+            let outputPath = path.resolve('./Views/Shared/Components/Webpack/', controllerName, viewName, 'index.cshtml');
 
             return new HtmlWebpackPlugin({
                 inject: false,
                 templateContent: ({ htmlWebpackPlugin }) => {
-                    const scripts = Object.keys(views[controllerName][viewName])
+                    let scripts = Object.keys(views[controllerName][viewName])
                         .map((fileName) => {
-                            const jsPath = htmlWebpackPlugin.files.js.find((jsPath) =>
+                            let jsPath = htmlWebpackPlugin.files.js.find((jsPath) =>
                                 jsPath.includes(`/${controllerName}/${viewName}/${fileName}.bundle.js`)
                             );
-
+                            console.log(`View caminho ${jsPath}`);
                             if (jsPath) {
                                 return `<script src="${jsPath.replace('/wwwroot', '')}"></script>`;
                             } else {
